@@ -1,10 +1,29 @@
 import { teamMembers } from "/db/script.js";
 
-let template = "";
+const submitButton = document.getElementById("submit");
+if (submitButton) {
+  submitButton.addEventListener("click", onClickSubmit);
+}
 
 const teamMembersContainer = document.getElementById("members");
-for (let value of teamMembers) {
-  template += `
+if (teamMembersContainer) {
+  teamMembersContainer.innerHTML = createTemplate(teamMembers);
+}
+
+function onClickSubmit(event) {
+  event.preventDefault();
+  const name = document.getElementById("inpName").value;
+  const role = document.getElementById("inpRole").value;
+  const email = document.getElementById("inpEmail").value;
+  const img = document.getElementById("inpImg").value;
+
+  teamMembers.push({ name, role, email, img });
+  /*   teamMembersContainer.innerHTML = createTemplate(teamMembers); */
+}
+function createTemplate(teamList) {
+  let template = "";
+  for (let value of teamList) {
+    template += `
             <div class="col">
                 <div class="card">
                     <img src="/${value.img}" alt="" class="card-img-top" />
@@ -15,7 +34,7 @@ for (let value of teamMembers) {
                     </div>
                 </div>
             </div>
-
 `;
+  }
+  return template;
 }
-teamMembersContainer.innerHTML = template;
