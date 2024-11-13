@@ -18,7 +18,7 @@ function onClickSubmit(event) {
   const img = document.getElementById("inpImg").value;
 
   teamMembers.push({ name, role, email, img });
-  /*   teamMembersContainer.innerHTML = createTemplate(teamMembers); */
+  teamMembersContainer.innerHTML = createTemplate(teamMembers);
 }
 function createTemplate(teamList) {
   let template = "";
