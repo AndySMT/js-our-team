@@ -1,16 +1,21 @@
 import { teamMembers } from "/db/script.js";
 
-const template = `
-  <div class="">
-    <div class="">
-        <img src="img/male1.png" alt="Marco Bianchi"/>
-    </div>
-    <div class="">
-        <h3>Marco Bianchi</h3>
-        <p>Designer</p>
-        <p>marcobianchi@team.com</p>
-    </div>
-    </div>
+let template = "";
+
+const teamMembersContainer = document.getElementById("members");
+for (let value of teamMembers) {
+  template += `
+            <div class="col">
+                <div class="card">
+                    <img src="/${value.img}" alt="" class="card-img-top" />
+                    <div class="card-body">
+                        <h5 class="card-title">${value.name}</h5>
+                        <p class="card-text">${value.role}</p>
+                        <p class="card-text">${value.email}</p>
+                    </div>
+                </div>
+            </div>
+
 `;
-const prova = document.getElementById("members");
-prova.innerHTML = template;
+}
+teamMembersContainer.innerHTML = template;
