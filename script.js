@@ -1,5 +1,10 @@
 import { teamMembers } from "/db/script.js";
 
+const storedMembers = JSON.parse(sessionStorage.getItem("teamMembers"));
+if (storedMembers) {
+  teamMembers.push(...storedMembers);
+}
+
 const submitButton = document.getElementById("submit");
 if (submitButton) {
   submitButton.addEventListener("click", onClickSubmit);
@@ -17,9 +22,14 @@ function onClickSubmit(event) {
   const email = document.getElementById("inpEmail").value;
   const img = document.getElementById("inpImg").value;
 
-  teamMembers.push({ name, role, email, img });
-  teamMembersContainer.innerHTML = createTemplate(teamMembers);
+  const newMember = { name, role, email, img };
+  teamMembers.push(newMember);
+
+  sessionStorage.setItem("teamMembers", JSON.stringify(teamMembers));
+
+  window.location.href = "index.html";
 }
+
 function createTemplate(teamList) {
   let template = "";
   for (let value of teamList) {
